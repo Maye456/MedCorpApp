@@ -1,23 +1,36 @@
 package com.gcu.model;
 
-public class ProcedureModel 
-{
-	long id = 0;
-	String procedureName = "";
-	String riskFactor = "";
-	String specialtyArea = "";
-	String description = "";
-	float price = 0;
-	String photo = "";
-	
-	@Override
-	public String toString()
-	{
-		return "ProductModel [procedureName=" + procedureName + ", riskFactor=" + riskFactor + ", specialtyArea=" + specialtyArea + ", description=" + description + ", price=" + price + "]";
-	}
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-	public ProcedureModel(long id, String procedureName, String riskFactor, String specialtyArea, String description, float price,
-			String photo)
+@Table("procedure")
+public class ProcedureEntity 
+{
+	@Id
+	@Column("Id")
+	long id;
+	
+	@Column("ProcedureName")
+	String procedureName = "";
+	
+	@Column("RiskFactor")
+	String riskFactor = "";
+	
+	@Column("SpecialtyArea")
+	String specialtyArea = "";
+	
+	@Column("Description")
+	String description = "";
+	
+	@Column("Price")
+	float price = 0;
+	
+	@Column("Photo")
+	String photo = "";
+
+	public ProcedureEntity(long id, String procedureName, String riskFactor, String specialtyArea, String description,
+			float price, String photo)
 	{
 		this.id = id;
 		this.procedureName = procedureName;
@@ -28,7 +41,7 @@ public class ProcedureModel
 		this.photo = photo;
 	}
 	
-	public ProcedureModel() {}
+	public ProcedureEntity() {}
 
 	public long getId() {
 		return id;
@@ -84,5 +97,5 @@ public class ProcedureModel
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
-	}	
+	}
 }

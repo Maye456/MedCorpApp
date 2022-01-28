@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gcu.business.ISecurityService;
+import com.gcu.business.IUserBusinessService;
 import com.gcu.model.LoginModel;
 
 @Controller
@@ -18,7 +19,7 @@ import com.gcu.model.LoginModel;
 public class LoginController 
 {
 	@Autowired
-	ISecurityService securityService;
+	ISecurityService service;
 	
 	@GetMapping("/")
 	public String display(Model model)
@@ -29,27 +30,27 @@ public class LoginController
 		return "login";
 	}
 	
-	@PostMapping("/doLogin")
-	public String doLogin(@Valid LoginModel loginModel, BindingResult bindingResult, Model model)
-	{
-		// Check for validation errors
-		if (bindingResult.hasErrors())
-		{
-			model.addAttribute("title", "Login Form");
-			return "login";
-		}
-		
-		// Check for valid login
-		if (securityService.isAuthenticated(loginModel))
-		{
-			// Login Success. Send them to the succes page to show what they entered
-			model.addAttribute("loginModel", loginModel);
-			return "loginSuccess";
-		}
-		else
-		{
-			// Login Failed
-			return "login";
-		}
-	}
+//	@PostMapping("/doLogin")
+//	public String doLogin(@Valid LoginModel login, BindingResult bindingResult, Model model)
+//	{
+//		// Check for validation errors
+//		if (bindingResult.hasErrors())
+//		{
+//			model.addAttribute("title", "Login Form");
+//			return "login";
+//		}
+//		
+//		// Check for valid login
+//		if (service.isAuthenticated(login));
+//		{
+//			// Login Success. Send them to the succes page to show what they entered
+//			model.addAttribute("loginModel", login);
+//			return "loginSuccess";
+//		}
+//		else
+//		{
+//			// Login Failed
+//			return "login";
+//		}
+//	}
 }

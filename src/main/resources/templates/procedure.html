@@ -6,63 +6,51 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-form {
-	border: 3px #ccc;
+* {
+    font-family: Arial;
 }
 
-input[type=text], input[type=password]{
-	width: 100%;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
-	box-sizing: border-box;
-	border-radius: 4px;
+h2 {
+    color: blue;
 }
 
-button {
-	background-color: #04AA6D;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 100%;
-	border-radius: 3px;
+p {
+    font-style: italic;
 }
 
-button:hover {
-	opacity: 0.8;
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 2px;
 }
 
-.cancelbtn {
-	width: auto;
-	padding: 10px 18px;
-	background-color: #f44336;
+ul.nav {
+  padding-left: 0px;
+  /* background-color: #3D99CE; */
+  text-align: center;
 }
 
-.imgcontainer {
-	text-align: center;
-	margin: 24px 0 12px 0;
+ul.nav > li {
+  display: inline-block;
+  padding: 10px 20px;
 }
 
-img.avatar {
-	width: 40%;
-	max-width: 300px;
-	border-radius: 50%;
+ul.nav > li > a {
+  color: black;
+  text-decoration: none;
 }
 
-.container {
-	padding: 16px;
-}
-
-span.psw {
-	float: right;
-	padding-top: 16px;
-}
-
-.fieldError {
-	color: red;
+.button {
+	background-color: #95C8D8;
+    border: none;
+    color: white;
+    padding: 6px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 </style>
 </head>
@@ -70,60 +58,33 @@ span.psw {
 
 
 <body>
-<div layout:fragment="content">
-	<form action="#" th:action="@{doProcedureCreate}" th:object="${procedureModel}" method="post">
-
-		<div class="container">
-			<!-- Procedure Name -->
-			<label for="procedureName"><b>Name of Procedure</b></label>
-			<input type="text" th:field="*{procedureName}" placeholder="Enter The Name of The Procedure" name="procedureName">
-			<div class="fieldError">
-				<p th:if="${#fields.hasErrors('procedureName')}" th:errors="*{procedureName}">Procedure Name Error</p>
-			</div>
-			
-			<!-- Risk Factor -->
-			<label for="riskFactor"><b>Risk Factor (1 - 10)</b></label>
-			<input type="text" th:field="*{riskFactor}" placeholder="Enter The Risk Factor" name="riskFactor">
-			<div class="fieldError">
-				<p th:if="${#fields.hasErrors('riskFactor')}" th:errors="*{riskFactor}">Risk Factor Error</p>
-			</div>
-			
-			<!-- Specialty Area -->
-			<label for="specialtyArea"><b>The Area of Specialty</b></label>
-			<input type="text" th:field="*{specialtyArea}" placeholder="Enter Area of Specialty" name="specialtyArea">
-			<div class="fieldError">
-				<p th:if="${#fields.hasErrors('specialtyArea')}" th:errors="*{specialtyArea}">Specialty Area Error</p>
-			</div>
-			
-			<!-- Description -->
-			<label for="description"><b>Description of Procedure</b></label>
-			<input type="text" th:field="*{description}" placeholder="Enter The Description of The Procedure" name="description">
-			<div class="fieldError">
-				<p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</p>
-			</div>
-			
-			<!-- Price -->
-			<label for="price"><b>Price of Procedure</b></label>
-			<input type="price" th:field="*{price}" placeholder="Enter The Price of The Procedure" name="price">
-			<div class="fieldError">
-				<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</p>
-			</div>
-			
-			<!-- Photo -->
-			<label for="photo"><b>Photo of Procedure</b></label>
-			<input type="photo" th:field="*{photo}" placeholder="Enter The Image of The Procedure" name="photo">
-			<div class="fieldError">
-				<p th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}">Price Error</p>
-			</div>
-			
-			<button type="submit">Create Procedure</button>
-		</div>
-		
-		<div th:if="${#fields.hasErrors('*')}">List of Errors</div>
-		<div th:each="err : ${#fields.errors('*')}">
-			<span th:text="${err}" class="fieldError"></span>
-		</div>
-	</form>
-</div>
+    <div layout:fragment="content" class="container-xl">
+        <h1 th:text="${title}"></h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Procedure Name</th>
+                <th>Risk Factor</th>
+                <th>Specialty Area</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Photo</th>
+            </tr>
+            <tr th:each="procedures : ${procedure}">
+                <td th:text="${procedures.id}"></td>
+                <td th:text="${procedures.procedureName}"></td>
+                <td th:text="${procedures.riskFactor}"></td>
+                <td th:text="${procedures.specialtyArea}"></td>
+                <td th:text="${procedures.description}"></td>
+                <td th:text="${procedures.price}"></td>
+                <td th:text="${procedures.photo}"></td>
+            </tr>
+        </table>
+        <ul class="nav">
+			<li><a href="/procedure/searchForm" class="button">Search Procedures</a></li>
+			<li><a href="/procedure/addNewForm" class="button">Create New Procedure</a></li>
+			<li><a href="/procedure/admin" class="button">Admin</a></li>
+		</ul>
+    </div>
 </body>
 </html>

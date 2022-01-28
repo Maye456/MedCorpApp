@@ -5,6 +5,8 @@ import javax.validation.constraints.Size;
 
 public class RegisterModel 
 {
+	private int id; 
+	
 	@NotNull(message="First Name is a required field")
 	@Size(min=5, message="First Name must be at least 5 characters")
 	private String firstName;
@@ -24,6 +26,26 @@ public class RegisterModel
 	@NotNull(message="Password is a required field")
 	@Size(min=5, max=32, message="Username must be between 5 and 32 characters")
 	private String password;
+
+	public RegisterModel(int id, String firstName, String lastName, String username, String email, String password)
+	{
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public RegisterModel() {}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -64,6 +86,8 @@ public class RegisterModel
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
 	
 	@Override
 	public String toString()

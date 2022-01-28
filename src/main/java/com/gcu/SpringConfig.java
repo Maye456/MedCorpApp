@@ -17,9 +17,9 @@ public class SpringConfig
 		return new Validation();
 	}
 	
-	@Bean(name="procedureBusinessService", initMethod="init", destroyMethod="destroy")
-	public IProcedureBusinessService getProcedureBusiness()
-	{
-		return new ProcedureBusinessService();
-	}
+//	@Bean(name="procedureBusinessService", initMethod="init", destroyMethod="destroy")
+//	public IProcedureBusinessService getProcedureBusiness()
+//	{
+//		return new ProcedureBusinessService();
+//	}
 }
